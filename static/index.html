@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Canvas - 灵魂画手拯救计划</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts 引入华丽的英文字体和干净的中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 背景动画粒子 -->
+    <div class="stars-container"></div>
+    
+    <div class="app-container">
+        <!-- 顶部标题 -->
+        <header class="app-header">
+            <h1 class="glow-text">DREAM CANVAS</h1>
+            <p class="sub-title">✨ 灵魂画手拯救计划 ✨</p>
+        </header>
+
+        <!-- 主内容区域，分为画板与操作/结果区 -->
+        <main class="content-grid">
+            
+            <!-- 左侧：交互式画板 -->
+            <section class="glass-panel drawing-section">
+                <div class="panel-header">
+                    <h3>🖌️ 您的灵魂画板</h3>
+                    <span class="status-pill">准备就绪</span>
+                </div>
+                <div class="canvas-container">
+                    <!-- 强制画布物理尺寸与显示大小协调 -->
+                    <canvas id="drawingCanvas" width="512" height="512"></canvas>
+                </div>
+                <div class="canvas-toolbar">
+                    <div class="tool-group">
+                        <label>笔触粗细</label>
+                        <input type="range" id="brushSize" min="2" max="30" value="6">
+                        <span id="sizeValue">6px</span>
+                    </div>
+                    <div class="tool-group color-palette">
+                        <input type="color" id="colorPicker" value="#ffffff">
+                        <!-- 预置魔法色盘 -->
+                        <div class="presets">
+                            <div class="preset-color active" style="background-color: #ffffff;" data-color="#ffffff"></div>
+                            <div class="preset-color" style="background-color: #ff007f;" data-color="#ff007f"></div>
+                            <div class="preset-color" style="background-color: #00f0ff;" data-color="#00f0ff"></div>
+                            <div class="preset-color" style="background-color: #ffee00;" data-color="#ffee00"></div>
+                        </div>
+                    </div>
+                    <div class="tool-actions">
+                        <button id="btnEraser" class="icon-btn" title="橡皮擦">🧽 擦除</button>
+                        <button id="btnClear" class="icon-btn btn-danger" title="清空画布">🗑️ 清空</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右侧：控制台与生成结果 -->
+            <section class="glass-panel console-section">
+                <div class="panel-header">
+                    <h3>🔮 魔法控制台</h3>
+                </div>
+                
+                <!-- 提示词输入区 -->
+                <div class="prompt-group">
+                    <textarea id="promptInput" placeholder="在左侧随便画几笔，然后在这里输入你的奇思妙想... 例如: '一只带着宇航帽的橘猫在太空中吃甜甜圈'"></textarea>
+                </div>
+
+                <!-- AI 美化强度控制 (ref_strength) -->
+                <div class="slider-group">
+                    <div class="slider-info">
+                        <label>🎨 美化力度</label>
+                        <span id="strengthDisplay">推荐美化 (0.4)</span>
+                    </div>
+                    <input type="range" id="refStrength" min="0.1" max="1.0" step="0.1" value="0.4">
+                    <div class="slider-hints">
+                        <span>🌈 创意上色 (忽视线条)</span>
+                        <span>📋 原样复刻 (不上色)</span>
+                    </div>
+                </div>
+
+                <!-- 生成按钮 -->
+                <button id="btnGenerate" class="magic-btn">
+                    <span class="btn-text">✨ 施展魔法 (生成大师画作)</span>
+                    <div class="btn-loader hidden">
+                        <div class="spinner"></div>
+                        <span>大模型施法中...</span>
+                    </div>
+                </button>
+
+                <!-- 报错信息展示 -->
+                <div id="errorMessage" class="error-banner hidden"></div>
+
+                <!-- 结果展示区域 -->
+                <div class="result-viewport">
+                    <div id="placeholderWrapper" class="placeholder-view">
+                        <div class="magic-circle-icon">✨</div>
+                        <p>画作生成后将呈现在此处</p>
+                    </div>
+                    
+                    <!-- 加载时显示的施法粒子特效容器 -->
+                    <div id="loadingOverlay" class="loading-overlay hidden">
+                        <div class="casting-glow"></div>
+                        <div class="pulse-text">正在捕获灵感...</div>
+                    </div>
+
+                    <div id="resultImageWrapper" class="result-view hidden">
+                        <img id="resultImg" src="" alt="AI Generated Masterpiece">
+                        <div class="image-actions">
+                            <a id="downloadBtn" href="#" target="_blank" class="sub-btn">💾 查看原图</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

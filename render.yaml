@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dream-canvas  # Render 上的应用名
+    env: python
+    region: singapore    # 距离近，速度快
+    plan: free           # 免费计划
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      # 注意：DASHSCOPE_API_KEY 需要在部署后去 Render 后台手动添加，切勿在此明文填写！

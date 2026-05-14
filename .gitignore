@@ -1,0 +1,15 @@
+# 阿里百炼 API Key 环境变量文件 (绝不能上传到公开仓库)
+.env
+
+# Python 编译产生的缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 本地测试生成的调试和临时文件
+debug_output.txt
+
+# 系统冗余文件
+.DS_Store
+Thumbs.db
+desktop.ini
